@@ -17,12 +17,15 @@ New Features:
 
 Bug Fixes:
 ^^^^^^^^^^
+- fixed a bug in ``traj_segment_generator`` where the ``episode_starts`` was wrongly recorded,
+  resulting in wrong calculation of Generalized Advantage Estimation (GAE), this affects TRPO, PPO1 and GAIL
 
 Deprecations:
 ^^^^^^^^^^^^^
 
 Others:
 ^^^^^^^
+- renamed some keys in ``traj_segment_generator`` to be more meaningful
 
 Documentation:
 ^^^^^^^^^^^^^^
