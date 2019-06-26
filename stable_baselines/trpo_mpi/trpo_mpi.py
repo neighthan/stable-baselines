@@ -339,6 +339,8 @@ class TRPO(ActorCriticRLModel):
                                                                               writer, self.num_timesteps)
 
                         args = seg["observations"], seg["observations"], seg["actions"], atarg
+                        # Subsampling: see p40-42 of John Schulman thesis
+                        # http://joschu.net/docs/thesis.pdf
                         fvpargs = [arr[::5] for arr in args]
 
                         self.assign_old_eq_new(sess=self.sess)
