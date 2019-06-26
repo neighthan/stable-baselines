@@ -26,6 +26,8 @@ Deprecations:
 Others:
 ^^^^^^^
 - renamed some keys in ``traj_segment_generator`` to be more meaningful
+- retrieve unnormalized reward when using Monitor wrapper with TRPO, PPO1 and GAIL
+  to display them in the logs (mean episode reward)
 
 Documentation:
 ^^^^^^^^^^^^^^

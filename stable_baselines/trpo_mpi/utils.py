@@ -97,9 +97,9 @@ def traj_segment_generator(policy, env, horizon, reward_giver=None, gail=False):
 
         if gail:
             reward = reward_giver.get_reward(observation, clipped_action[0])
-            observation, true_reward, done, _info = env.step(clipped_action[0])
+            observation, true_reward, done, info = env.step(clipped_action[0])
         else:
-            observation, reward, done, _info = env.step(clipped_action[0])
+            observation, reward, done, info = env.step(clipped_action[0])
             true_reward = reward
         rewards[i] = reward
         true_rewards[i] = true_reward
@@ -111,6 +111,13 @@ def traj_segment_generator(policy, env, horizon, reward_giver=None, gail=False):
         current_it_len += 1
         current_ep_len += 1
         if done:
+            # Retrieve unnormalized reward if using Monitor wrapper
+            maybe_ep_info = info.get('episode')
+            if maybe_ep_info is not None:
+                if not gail:
+                    cur_ep_ret = maybe_ep_info['r']
+                cur_ep_true_ret = maybe_ep_info['r']
+
             ep_rets.append(cur_ep_ret)
             ep_true_rets.append(cur_ep_true_ret)
             ep_lens.append(current_ep_len)
